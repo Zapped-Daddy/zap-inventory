@@ -1,0 +1,554 @@
+:root {
+    --text-color: #181818;
+    --background-color: #33b28e;
+    --font-size: 0.7vh;
+    --hover-color: #3bd2a8;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: none !important;
+    font-family: "Roboto", sans-serif;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: none;
+    border-radius: 3px; /* Rounded scrollbar thumb */
+}
+
+#qbcore-inventory {
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+.inv-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+.player-inv-info {
+    position: absolute;
+    top: 22.5%;
+    left: 6%;
+    width: 25%;
+    height: max-content;
+    float: left;
+    font-weight: bolder;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 5px;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1; /* Add this line */
+    transform: rotate(1.75deg); /* Adjust tilt angle */
+    transition: transform 0.2s ease-in-out;
+    transform-origin: left right; /* Keeps the top fixed */
+}
+
+
+#player-inv-progressbar {
+    height: 8px;
+    top: 25.5%;
+    left: 6%;
+    border-radius: 10px;
+    width: 25%;
+    position: absolute;
+    transition: width 0.2s;
+    background-color: #2d2d2d;
+    z-index: 1; /* Add this line */
+    transform: rotate(1.75deg); /* Adjust tilt angle */
+    transition: transform 0.2s ease-in-out;
+    transform-origin: top bottom; /* Keeps the top fixed */
+}
+
+.other-inv-info {
+    position: absolute;
+    top: 22%;
+    right: 5%;
+    width: 25%;
+    height: fit-content;
+    float: left;
+    font-weight: bolder;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 10px;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1; /* Add this line */
+    transform: rotate(-1.75deg); /* Adjust tilt angle */
+    transition: transform 0.2s ease-in-out;
+    transform-origin: top bottom; /* Keeps the top fixed */
+}
+
+#other-inv-progressbar {
+    position: absolute;
+    top: 25.5%;
+    width: 25%;
+    border-radius: 10px;
+    right: 5%;
+    height: 8px;
+    transition: width 0.2s;
+    background-color: #2d2d2d;
+    z-index: 1; /* Add this line */
+    transform: rotate(-1.75deg); /* Adjust tilt angle */
+    transition: transform 0.2s ease-in-out;
+    transform-origin: top bottom; /* Keeps the top fixed */
+}
+
+.ui-progressbar.ui-widget.ui-widget-content {
+    border: none;
+    background-color: var (--background-color);
+}
+
+.ui-progressbar.ui-widget-content {
+    border: none;
+}
+
+.ui-progressbar .ui-widget-header {
+    border: none;
+}
+
+.ui-progressbar-value {
+    transition: width 0.5s;
+    -webkit-transition: width 0.5s;
+}
+
+.ui-progressbar .ui-progressbar-value {
+    background-color: rgb(147, 255, 45);
+}
+
+.ui-progressbar-medium .ui-progressbar-value {
+    background-color: yellow;
+}
+
+.ui-progressbar-high .ui-progressbar-value {
+    background-color: red;
+}
+
+.player-inventory {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    position: absolute;
+    top: 28%;
+    left: 6.5%;
+    width: 28%;
+    height: 47%;
+    float: left;
+    overflow-y: auto;
+    gap: 10px; /* Adjust this value to increase or decrease the gap */
+    transform: perspective(800px) rotateY(5deg); /* Adjust tilt angle */
+    transition: transform 0.2s ease-in-out;
+    transform-origin: top bottom; /* Keeps the top fixed */
+}
+
+.oth-background-box {
+    position: absolute;
+    top: 22%; /* Adjust these values to position the box */
+    left: 68.5%;
+    width: 27%; /* Adjust these values to size the box */
+    height: 55%;
+    border-radius: 15px; /* Adjust this value to change the radius */
+    z-index: -1; /* This ensures the box is behind the other boxes */
+    background: rgb(50, 50, 50);
+    border: 4px solid #808685;
+    transform: perspective(800px) rotateY(-5deg); /* Adjust tilt angle */
+    transition: transform 0.2s ease-in-out;
+    transform-origin: top bottom; /* Keeps the top fixed */
+
+    background: linear-gradient(90deg, rgb(50, 50, 50) 0%, rgba(50, 50, 50, 0.782) 100%);
+
+    background: -moz-linear-gradient(90deg, rgb(50, 50, 50) 0%, rgba(50, 50, 50, 0.723) 100%);
+
+    background: -webkit-linear-gradient(90deg, rgb(50, 50, 50) 0%, rgba(50, 50, 50, 0.76) 100%);
+
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#232223", endColorstr="#2B2B2C", GradientType=1 );
+}
+
+.background-box {
+    position: absolute;
+    top: 22%; /* Adjust these values to position the box */
+    left: 5%;
+    width: 27%; /* Adjust these values to size the box */
+    height: 55%;
+    border: 1px solid rgba(65, 65, 65, 0.5);
+    border-radius: 15px; /* Adjust this value to change the radius */
+    z-index: -1; /* This ensures the box is behind the other boxes */   
+    background: rgb(50, 50, 50);
+    border: 4px solid #808685;
+    transform: perspective(800px) rotateY(5deg); /* Adjust tilt angle */
+    transition: transform 0.2s ease-in-out;
+    transform-origin: top bottom; /* Keeps the top fixed */
+
+    background: linear-gradient(90deg, rgb(50, 50, 50, 0.9) 0%, rgba(50, 50, 50, 0.8) 100%);
+
+    background: -moz-linear-gradient(90deg, rgb(50, 50, 50) 0%, rgba(50, 50, 50, 0.723) 100%);
+
+    background: -webkit-linear-gradient(90deg, rgb(50, 50, 50) 0%, rgba(50, 50, 50, 0.76) 100%);
+
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#232223", endColorstr="#2B2B2C", GradientType=1 );
+}
+
+.op-background-box{
+    position: absolute;
+    bottom: 25%;
+    right: 0%;
+    width: 100%;
+    height: 115%;
+    border: 2px solid #808685;
+    border-radius: 15px;
+    z-index: -1;
+    background: rgb(15, 15, 15);
+
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.9) 0%, rgba(50, 50, 50, 0.8) 100%);
+
+    background: -moz-linear-gradient(90deg, rgb(0, 0, 0) 0%, rgba(50, 50, 50, 0.723) 100%);
+
+    background: -webkit-linear-gradient(90deg, rgb(0, 0, 0) 0%, rgba(50, 50, 50, 0.76) 100%);
+
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#232223", endColorstr="#2B2B2C", GradientType=1 );
+    
+}
+
+
+.z-background-box {
+    display: none;
+    position: absolute;
+    top: 84.5%; /* Adjust these values to position the box */
+    left: 31.5%;
+    width: 37%; /* Adjust these values to size the box */
+    height: 14%;
+    border: 1px solid rgb(65, 65, 65, 0.5);
+    border-radius: 15px; /* Adjust this value to change the radius */
+    z-index: -1; /* This ensures the box is behind the other boxes */
+    background: rgb(30, 30, 30);
+    border: 1px solid #808685;
+
+    background: linear-gradient(90deg, rgb(30, 30, 30) 0%, rgba(30, 30, 30, 0.750) 100%);
+
+    background: -moz-linear-gradient(90deg, rgb(30, 30, 30) 0%, rgba(30, 30, 30, 0.750) 100%);
+
+    background: -webkit-linear-gradient(90deg, rgb(30, 30, 30) 0%, rgba(30, 30, 30, 0.750) 100%);
+
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#232223", endColorstr="#2B2B2C", GradientType=1 );
+}
+
+
+.player-inventory,
+.other-inventory {
+    z-index: 1; /* This ensures these boxes are in front of the background box */
+    /* Other styles */
+}
+
+
+.other-inventory {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    position: absolute;
+    top: 28%;
+    right: 2%;
+    width: 28%;
+    height: 47%;
+    float: left;
+    overflow-y: auto;
+    gap: 10px; /* Adjust this value to increase or decrease the gap */
+    transform: perspective(800px) rotateY(-5deg); /* Adjust tilt angle */
+    transition: transform 0.2s ease-in-out;
+    transform-origin: top bottom; /* Keeps the top fixed */
+    transition: transform .2s;
+
+    }
+    
+
+
+.item-slot {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(20% - 1.5px);
+    margin: 0.5px;
+    height: 10.9vh;
+    border: 2px solid rgba(60, 124, 0, 0.671);
+    border-radius: 10px;
+    background: rgba(40, 100, 0, 0.8);
+    transform: perspective(800px) rotateY(5deg); /* Adjust tilt angle */
+    transition: transform 0.2s ease-in-out;
+    transform-origin: top bottom; /* Keeps the top fixed */
+
+    background: linear-gradient(90deg, rgba(25, 27, 24, 0.8) 0%, rgba(30, 30, 30, 0.8) 100%);
+
+    background: -moz-linear-gradient(90deg, rgba(25, 27, 24, 0.691) 0%, rgba(30, 30, 30, 0.724) 100%);
+
+    background: -webkit-linear-gradient(90deg, rgba(25, 27, 24, 0.691) 0%, rgba(30, 30, 30, 0.724) 100%);
+
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#3BD2A8", endColorstr="#2B2B2C", GradientType=1 );
+}
+
+
+.item-slot-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.item-slot-img img {
+    width: 50%;
+    height: auto;
+}
+
+.item-slot-key {
+    font-weight: bolder;
+    color: #ffffff;
+    position: absolute;
+    top: 8px;
+    left: 78px;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(24, 24, 24, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.2);
+    transform: perspective(800px) rotateY(5deg); /* Adjust tilt angle */
+    transition: transform 0.2s ease-in-out;
+    transform-origin: top bottom; /* Keeps the top fixed */
+}
+
+.item-slot-key p {
+    margin: 0;
+}
+
+.item-slot-amount {
+    font-size: 0.9vh;
+    color: white;
+    position: absolute;
+    top: 87px;
+    right: 10px;
+    width: 100%;
+    height: 20px;
+    display: flex;
+    justify-content: flex-end;
+    transform: perspective(800px) rotateY(5deg); /* Adjust tilt angle */
+    transition: transform 0.2s ease-in-out;
+    transform-origin: top bottom; /* Keeps the top fixed */
+}
+
+.item-slot-label {
+    position: absolute;
+    white-space: wrap;
+    top: 2vh;
+    height: 0vh;
+    width: 100%;
+    /*background-color: var(--background-color);*/
+    display: flex;
+    justify-content: left;
+    padding-left: 9px;
+    align-items: center;
+    transform: perspective(800px) rotateY(5deg); /* Adjust tilt angle */
+    transition: transform 0.2s ease-in-out;
+    transform-origin: top bottom; /* Keeps the top fixed */
+}
+
+.item-slot-label p {
+    margin: 0;
+    font-size: var(--font-size);
+    text-transform: uppercase;
+    color: #ffffff;
+    font-weight: bolder;
+    transform: perspective(800px) rotateY(5deg); /* Adjust tilt angle */
+    transition: transform 0.2s ease-in-out;
+    transform-origin: top center; /* Keeps the top fixed */
+}
+
+.item-slot-quality-bar p {
+    height: 6px;
+    border-radius: 50px;
+    background-color: #2d2d2d;
+    display: none;
+    transform: perspective(800px) rotateY(5deg); /* Adjust tilt angle */
+    transition: transform 0.2s ease-in-out;
+    transform-origin: top center; /* Keeps the top fixed */
+}
+
+.item-slot-quality {
+    position: absolute;
+    bottom: 0.5vh;
+    width: 90%;
+    border-radius: 50px;
+    height: 6px;
+    background-color: #2d2d2d;
+    transform: perspective(800px) rotateY(5deg); /* Adjust tilt angle */
+    transition: transform 0.2s ease-in-out;
+    transform-origin: top center; /* Keeps the top fixed */
+}
+
+.item-slot-quality-bar {
+    height: 6px;
+    border-radius: 50px;
+    transform: perspective(800px) rotateY(5deg); /* Adjust tilt angle */
+    transition: transform 0.2s ease-in-out;
+    transform-origin: top center; /* Keeps the top fixed */
+}
+
+.inv-options {
+    position: absolute;
+    width: 10%;
+    top: 62%;
+    left: 46%;
+    transform: translate(-50%, -50%);
+    transform: perspective(800px) rotateY(5deg); /* Adjust tilt angle */
+    transition: transform 0.2s ease-in-out;
+    transform-origin: top center; /* Keeps the top fixed */
+}
+
+.inv-options-list {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    transform: perspective(800px) rotateY(5deg); /* Adjust tilt angle */
+    transition: transform 0.2s ease-in-out;
+    transform-origin: top center; /* Keeps the top fixed */
+}
+
+.inv-option-item {
+    width: 100%;
+    margin: 10px;
+    right: 70%;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 3vh;
+    font-weight: bolder;
+    color: #808685;
+    background-color: transparent;
+
+}
+
+#item-use p,
+#item-give p,
+#inv-close p,
+#weapon-attachments p {
+    margin: 0;
+}
+
+.ply-iteminfo-container .iteminfo-content .item-info-title,
+.ply-iteminfo-container .iteminfo-content .item-info-line,
+.ply-iteminfo-container .iteminfo-content .item-info-description {
+    color: white; /* Adjust this value to change the color */
+}
+
+.ply-iteminfo-container {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 27%;
+    left: 44%;
+    width: 15vw;
+    transform: translate(-50%, -50%);
+    align-items: center;
+    text-align: center;
+    background: rgb(30, 30, 30, 0.95);
+    border-radius: 10px;
+    transform: perspective(800px) rotateY(5deg); /* Adjust tilt angle */
+    transition: transform 0.2s ease-in-out;
+    transform-origin: top center; /* Keeps the top fixed */
+
+    background: linear-gradient(90deg, rgb(30, 30, 30) 0%, rgba(30, 30, 30, 0.750) 100%);
+
+    background: -moz-linear-gradient(90deg, rgb(30, 30, 30) 0%, rgba(30, 30, 30, 0.750) 100%);
+
+    background: -webkit-linear-gradient(90deg, rgb(30, 30, 30) 0%, rgba(30, 30, 30, 0.750) 100%);
+
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#232223", endColorstr="#2B2B2C", GradientType=1 );
+    border-radius: 10px;
+}
+
+.itemboxes-container {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    width: 30vw;
+    transform: perspective(500px) rotateX(15deg); /* Adjust tilt angle */
+    transition: transform 0.2s ease-in-out;
+    transform-origin: top center; /* Keeps the top fixed */
+    padding-bottom: 3vh;
+}
+
+.requiredItem-container {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    width: 30vw;
+    transform: translateX(-50%);
+    padding-bottom: 3vh;
+}
+
+.z-hotbar-inventory {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    gap: 10px;
+    width: 35vw;
+    transform: translateX(-50%);
+    padding-bottom: 3vh;
+    background-color: rgba(30, 30, 30, 0.95);
+    border-radius: 10px;
+}
+
+
+
+#cash {
+    position: absolute;
+    top: -35px;
+    left: 60px;
+    font-size: large;
+    color: #ffffff;
+    font-weight: 500;
+  }
+
+  #bank {
+    position: absolute;
+    top: -65px;
+    left: 60px;
+    color: #ffffff;
+    font-size: large;
+    font-weight: 500;
+  }
